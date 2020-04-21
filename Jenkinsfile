@@ -1,21 +1,20 @@
 pipeline {
-  agent any
- 
-   stages {
-   stage("Checkout code") {
+    agent any
+    
+    stages {
+        stage("Checkout code") {
             steps {
                 checkout scm
             }
         }
-       
-    stage("Build image") {
+        stage("Build image") {
             steps {
                 script {
                     myapp = docker.build("ashish362/docker-demo:${env.BUILD_ID}")
                 }
             }
         }
-         stage("Push image") {
+        stage("Push image") {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
@@ -24,7 +23,9 @@ pipeline {
                     }
                 }
             }
-        }    
-    
+        }        
+       
+    }    
+}
      
      

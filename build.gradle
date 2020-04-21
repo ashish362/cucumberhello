@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		
+	}
+	compile group: 'io.cucumber', name: 'cucumber-java', version: '5.4.0'
+		compile group: 'io.cucumber', name: 'cucumber-junit-platform-engine', version: '5.4.0'
+		testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '5.5.0'
+		
+}
+
+test {
+	useJUnitPlatform()
+}
+
+configurations {
+   cucumberRuntime {
+      extendsFrom testImplementation
+   }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'com.example.cucumberhello', 'src/test/resources']
+        }
+    }
+}
+
+

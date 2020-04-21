@@ -1,31 +1,39 @@
 pipeline {
-    agent any
+  environment {
+    registry = "ashish362/docker-demo"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
     
-    stages {
-        stage("Checkout code") {
-            steps {
-                checkout scm
-            }
+ 
+  stage('Docker Image Build') {
+    steps{
+      script {
+        dockerImage = docker.build registry + ":cucumberhello"
+      }
+    }
+  }
+
+ 
+
+  stage('Push Image to DockerHub'){
+    steps{
+      script {
+        docker.withRegistry( '', registryCredential ) {
+          dockerImage.push()
         }
-        stage("Build image") {
-            steps {
-                script {
-                    myapp = docker.build("ashish362/docker-demo:${env.BUILD_ID}")
-                }
-            }
-        }
-        stage("Push image") {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
-                    }
-                }
-            }
-        }        
-       
-    }    
+      }
+    }
+  }
+
+ 
+
+  stage('Remove Unused docker image') {
+    steps{
+      sh "docker rmi $registry:cucumberhello"
+    }
+  }    
 }
-     
-     
+}

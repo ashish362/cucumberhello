@@ -3,7 +3,7 @@ pipeline {
     registry = "ashish362/docker-demo"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    PROJECT_ID = 'Internal Investment-206615'
+    PROJECT_ID = 'internal-investment-206615'
     CLUSTER_NAME = 'cucumber-hello'
     LOCATION = 'us-central1-f'
     CREDENTIALS_ID = ''

@@ -19,18 +19,14 @@ pipeline {
                 sh './gradlew build'
             }
         }
-	
- 
-  stage('Docker Image Build') {
+	 stage('Docker Image Build') {
     steps{
+	   
       script {
-      //  dockerImage = docker.build registry + ":cucumberhello"
-        sh 'docker build -t cucumberhello .'
+        dockerImage = docker.build registry + ":cucumberhello"
       }
     }
   }
-
- 
 
   stage('Push Image to DockerHub'){
     steps{
@@ -41,6 +37,11 @@ pipeline {
       }
     }
   }
+ 
+
+ 
+
+ 
 
  
 

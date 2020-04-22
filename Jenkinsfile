@@ -6,7 +6,13 @@ pipeline {
   }
   agent any
   stages {
-    
+    stage("Build the project") {
+            steps {
+                sh 'chmod +x gradlew'
+                sh './gradlew build'
+            }
+        }
+	
  
   stage('Docker Image Build') {
     steps{

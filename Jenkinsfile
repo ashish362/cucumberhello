@@ -6,7 +6,7 @@ pipeline {
     PROJECT_ID = 'Internal Investment-206615'
     CLUSTER_NAME = 'cucumber-hello'
     LOCATION = 'us-central1-f'
-    CREDENTIALS_ID = 'Internal Investment-206615'
+    CREDENTIALS_ID = 'gke'
   }
   
   agent any

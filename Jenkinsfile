@@ -3,7 +3,12 @@ pipeline {
     registry = "ashish362/docker-demo"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    PROJECT_ID = 'Internal Investment-206615'
+    CLUSTER_NAME = 'cucumber-hello'
+    LOCATION = 'us-central1-f'
+    CREDENTIALS_ID = 'Internal Investment-206615'
   }
+  
   agent any
      tools {
       
@@ -37,13 +42,20 @@ pipeline {
       }
     }
   }
+  
+  stage('Deploy Production') {
+      steps{
+                            step([$class: 'KubernetesEngineBuilder', 
+                            projectId: env.PROJECT_ID, 
+                            clusterName: env.CLUSTER_NAME, 
+                            zone: env.LOCATION, 
+                            manifestPattern: 'deployment.yaml', 
+                            credentialsId: env.CREDENTIALS_ID, 
+                            verifyDeployments: true])
+            }
+        }
  
 
- 
-
- 
-
- 
 
   stage('Remove Unused docker image') {
     steps{

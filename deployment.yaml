@@ -15,10 +15,10 @@ template:
   spec:
     containers:
     - name: hello
-      image: DOCKER-HUB-USERNAME/hello:latest
+      image: ashish362/docker-demo:cucumberhello
       imagePullPolicy: Always
       ports:
-      - containerPort: 5000
+      - containerPort: 2020
         name: hello
 
 ---
@@ -31,8 +31,8 @@ labels:
   app: hello
 spec:
 ports:
-  - port: 5000
-    targetPort: 5000
+  - port: 2020
+    targetPort: 2020
 selector:
   app: hello
   tier: hello

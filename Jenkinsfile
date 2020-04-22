@@ -6,7 +6,7 @@ pipeline {
     PROJECT_ID = 'Internal Investment-206615'
     CLUSTER_NAME = 'cucumber-hello'
     LOCATION = 'us-central1-f'
-    CREDENTIALS_ID = 'gke'
+    CREDENTIALS_ID = ''
   }
   
   agent any
@@ -50,7 +50,7 @@ pipeline {
                             clusterName: env.CLUSTER_NAME, 
                             zone: env.LOCATION, 
                             manifestPattern: 'deployment.yaml', 
-                            credentialsId: env.CREDENTIALS_ID, 
+                            credentialsId: "Internal Investment-206615", 
                             verifyDeployments: true])
             }
         }

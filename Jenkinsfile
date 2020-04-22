@@ -9,7 +9,6 @@ pipeline {
       // Install the Maven version configured as "M3" and add it to the path.
       jdk "java"
       gradle "gradle"
-      org.jenkinsci.plugins.docker.commons.tools.DockerTool "uff"
    }
   stages {
     stage("Build the project") {

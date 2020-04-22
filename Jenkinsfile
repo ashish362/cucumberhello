@@ -45,7 +45,6 @@ pipeline {
   
   stage('Deploy Production') {
       steps{
-	               sh "gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${LOCATION} --project ${PROJECT_ID}"
 
 
                             step([$class: 'KubernetesEngineBuilder', 

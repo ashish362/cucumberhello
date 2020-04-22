@@ -9,7 +9,7 @@ pipeline {
       // Install the Maven version configured as "M3" and add it to the path.
       jdk "java"
       gradle "gradle"
-      docker "uff"
+      
       
    }
   stages {
@@ -24,7 +24,8 @@ pipeline {
   stage('Docker Image Build') {
     steps{
       script {
-        dockerImage = docker.build registry + ":cucumberhello"
+      //  dockerImage = docker.build registry + ":cucumberhello"
+        sh 'docker build -t cucumberhello .'
       }
     }
   }

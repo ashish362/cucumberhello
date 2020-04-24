@@ -52,7 +52,7 @@ pipeline {
                             clusterName: env.CLUSTER_NAME, 
                             zone: env.LOCATION, 
                             manifestPattern: 'deployment.yaml', 
-                            credentialsId: "Internal Investment-206615", 
+                            credentialsId: "InternalInvestment-206615", 
                             verifyDeployments: true])
             }
         }
